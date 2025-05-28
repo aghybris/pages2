@@ -47,7 +47,7 @@
            theme: 'snow'
         });
         // Feld auslesen & im Editor anzeigen
-        const email = data.value || "";
+        const email = JSON.stringify(data.value, null, 2) || "";
         quill.setText(email);
         document.getElementById('output').textContent = JSON.stringify(data, null, 2);
       } catch (error) {
