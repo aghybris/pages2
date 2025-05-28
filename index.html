@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>SAP Account Service Test</title>
+</head>
+<body>
+  <h2>SAP Accounts abrufen</h2>
+  <button onclick="loadAccounts()">Accounts abrufen</button>
+  <pre id="output"></pre>
+  <script>
+    async function loadAccounts() {
+      const url = "https://my1001526.de1.crm.cloud.sap/sap/c4c/api/v1/account-service/accounts";
+
+      // Basic Auth (Username:Passwort) – NUR FÜR TESTS!
+      const username = "DEIN_USER";
+      const password = "DEIN_PASSWORT";
+      const headers = new Headers();
+      headers.append('Authorization', 'Basic ' + btoa(username + ":" + password));
+      headers.append('Accept', 'application/json');
+
+      try {
+        const response = await fetch(url, { headers });
+        if (!response.ok) {
+          document.getElementById('output').textContent =
+            "Fehler: " + response.status + " " + response.statusText;
+          return;
+        }
+        const data = await response.json();
+        document.getElementById('output').textContent = JSON.stringify(data, null, 2);
+      } catch (error) {
+        document.getElementById('output').textContent = "Fehler: " + error;
+      }
+    }
+  </script>
+</body>
+</html>
+
