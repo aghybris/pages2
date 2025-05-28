@@ -69,16 +69,19 @@
       console.info("Save!");  
       //document.getElementById('output').textContent = "Speichere ...";
       const form = document.getElementById('loginForm');
-      const data = JSON.parse(form.dataset.json);
+      //const data = JSON.parse(form.dataset.json);
       console.info(JSON.stringify(data, null, 2));
       data.value.extensions.Lieferinformationen = "Spedi muss immer Slot einholen über Cargoclix, Spedi weiss Bescheid (contact@dslog.fr), ca. 5 Tage vorher (max. 15 Tage vorher möglich) xxx"
       console.info(JSON.stringify(data, null, 2));
+      console.info('Send Request');
       try {
         const response = await fetch(apiUrl, {
           method: 'PATCH',
           headers: headers,
           body: JSON.stringify(data)
         });
+        
+        console.info('Response:');
         console.info(response);
         if (!response.ok) {
           document.getElementById('output').textContent =
