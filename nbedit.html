@@ -70,6 +70,7 @@
       //document.getElementById('output').textContent = "Speichere ...";
       const form = document.getElementById('loginForm');
       const data= form.dataset.json;
+      console.info(data);
       data.value.extensions.Lieferinformationen = "Spedi muss immer Slot einholen über Cargoclix, Spedi weiss Bescheid (contact@dslog.fr), ca. 5 Tage vorher (max. 15 Tage vorher möglich) xxx"
       console.info(JSON.stringify(data, null, 2));
       try {
