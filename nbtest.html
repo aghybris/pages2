@@ -6,19 +6,26 @@
 </head>
 <body>
   <h2>SAP Accounts abrufen</h2>
-  <button onclick="loadAccounts()">Accounts abrufen</button>
+  <form id="loginForm" onsubmit="event.preventDefault(); loadAccounts();">
+    <label for="username">Benutzername:</label>
+    <input type="text" id="username" required>
+    <br>
+    <label for="password">Passwort:</label>
+    <input type="password" id="password" required>
+    <br>
+    <button type="submit">Accounts abrufen</button>
+  </form>
   <pre id="output"></pre>
   <script>
     async function loadAccounts() {
       const url = "https://my1001526.de1.crm.cloud.sap/sap/c4c/api/v1/account-service/accounts";
-
-      // Basic Auth (Username:Passwort) – NUR FÜR TESTS!
-      const username = "DEIN_USER";
-      const password = "DEIN_PASSWORT";
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
       const headers = new Headers();
       headers.append('Authorization', 'Basic ' + btoa(username + ":" + password));
       headers.append('Accept', 'application/json');
 
+      document.getElementById('output').textContent = "Lade Daten ...";
       try {
         const response = await fetch(url, { headers });
         if (!response.ok) {
@@ -35,4 +42,3 @@
   </script>
 </body>
 </html>
-
