@@ -64,21 +64,24 @@
       const headers = new Headers();
       headers.append('Authorization', 'Basic ' + btoa(username + ":" + password));
       headers.append('Accept', 'application/json');
-
+      console.info("Save!");  
       //document.getElementById('output').textContent = "Speichere ...";
       data.value.extensions.Lieferinformationen = "Spedi muss immer Slot einholen über Cargoclix, Spedi weiss Bescheid (contact@dslog.fr), ca. 5 Tage vorher (max. 15 Tage vorher möglich) xxx"
+      console.info(JSON.stringify(data, null, 2));
       try {
         const response = await fetch(apiUrl, {
           method: 'PATCH',
           headers: headers,
           body: JSON.stringify(data)
         });
+        console.info(response);
         if (!response.ok) {
           document.getElementById('output').textContent =
             "Fehler: " + response.status + " " + response.statusText;
           return;
         }
         const data = await response.json();
+        console.info(JSON.stringify(data, null, 2));
         document.getElementById('output').textContent = "Gespeichert! Antwort:\n" + JSON.stringify(data, null, 2);
       } catch (err) {
         document.getElementById('output').textContent = "Fehler: " + err;
