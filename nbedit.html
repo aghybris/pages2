@@ -83,6 +83,8 @@
         
         console.info('Response:');
         console.info(response);
+        console.info(':::::::::');
+        console.info(JSON.stringify(response, null, 2));
         if (!response.ok) {
           document.getElementById('output').textContent =
             "Fehler: " + response.status + " " + response.statusText;
