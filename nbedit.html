@@ -72,9 +72,10 @@
       //const data = JSON.parse(form.dataset.json);
       // Die meisten SAP APIs erwarten beim PATCH nur das geänderte Feld!
       const data = {
-        extensions: {
+        value: {extensions: {
          Lieferinformationen: 'Test'
        }
+      }
       }  ;
 
       console.info(JSON.stringify(data, null, 2));
