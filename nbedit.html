@@ -68,8 +68,15 @@
       headers.append('Accept', 'application/json');
       console.info("Save!");  
       //document.getElementById('output').textContent = "Speichere ...";
-      const form = document.getElementById('loginForm');
-      const data = JSON.parse(form.dataset.json);
+      //const form = document.getElementById('loginForm');
+      //const data = JSON.parse(form.dataset.json);
+      // Die meisten SAP APIs erwarten beim PATCH nur das geänderte Feld!
+      const data = {
+        extensions: {
+         Lieferinformationen: lieferinfo
+       }
+      }  ;
+
       console.info(JSON.stringify(data, null, 2));
       data.value.extensions.Lieferinformationen = "Spedi muss immer Slot einholen über Cargoclix, Spedi weiss Bescheid (contact@dslog.fr), ca. 5 Tage vorher (max. 15 Tage vorher möglich) xxx"
       console.info(JSON.stringify(data, null, 2));
@@ -78,7 +85,7 @@
         const response = await fetch(url, {
           method: 'PATCH',
           headers: headers,
-          body: '{  extensions: {    Lieferinformationen: "Neuer Wert"  }}'
+          body: JSON.stringify(patchBody)
         });
         
         console.info('Response:');
